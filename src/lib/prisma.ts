@@ -1,5 +1,4 @@
-// @ts-nocheck
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { PrismaClient } from "@prisma/client"
 
 let prismaClient: PrismaClient
@@ -7,10 +6,10 @@ let prismaClient: PrismaClient
 if (process.env.NODE_ENV === "production") {
   prismaClient = new PrismaClient()
 } else {
-  if (!global.prismaClient) {
-    global.prismaClient = new PrismaClient()
+  if (!(global as any).prismaClient) {
+    ;(global as any).prismaClient = new PrismaClient()
   }
-  prismaClient = global.prismaClient
+  prismaClient = (global as any).prismaClient
 }
 
 export default prismaClient
