@@ -14,6 +14,9 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  const polls = await prismaClient.poll.findMany({ include: { options: true } })
+  const polls = await prismaClient.poll.findMany({
+    include: { options: true },
+    orderBy: { createAt: "desc" },
+  })
   return NextResponse.json(polls, { status: 200 })
 }
